@@ -1,3 +1,5 @@
+// getting the user info
+
 const userInfo = (req, res) => {
   try {
 
