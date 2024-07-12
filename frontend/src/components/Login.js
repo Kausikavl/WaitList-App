@@ -21,11 +21,13 @@ const Login = ({ handleLogin }) => {
     }
     setLoading(true);
     const user = { email, password };
+    // Redirect admin to admin page
     if(email=='admin@gmail.com'){
       navigate('/admin')
       toast.success("Admin logged")
     }
     else{
+      // Handle regular user login
     axios
       .post(`http://localhost:5000/auth/login`, {
         user: user,
@@ -52,7 +54,7 @@ const Login = ({ handleLogin }) => {
       });
     }
   };
-
+// Check if user is already logged in
   useEffect(() => {
     let userInfo = localStorage.getItem("signedJWT");
     if (userInfo) {

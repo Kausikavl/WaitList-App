@@ -7,6 +7,7 @@ const Score = ({ socket }) => {
   const { user, score, setScore, token } = UserState();
   const navigate = useNavigate();
 
+  // useEffect hook to set up event listener and fetch initial score
   useEffect(() => {
     socket.on("updated-leaderboard", (leaderboard) => {
       let position = leaderboard.users;
@@ -15,6 +16,7 @@ const Score = ({ socket }) => {
     getScore();
   }, []);
 
+   // Function to get the score from the server
   const getScore = async () => {
     let config = {
       headers: {
@@ -33,6 +35,7 @@ const Score = ({ socket }) => {
       });
   };
 
+   // Function to copy text to clipboard
   const copy = async (text) => {
     await navigator.clipboard.writeText(text);
     console.log("copied", text);

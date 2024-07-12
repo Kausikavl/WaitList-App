@@ -12,6 +12,7 @@ const Referral = ({ socket }) => {
   const { token, setUser } = UserState();
 
   useEffect(() => {
+       // Prompt user before leaving the page
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
@@ -32,6 +33,8 @@ const Referral = ({ socket }) => {
       },
     };
 
+    // Post the referral code to the server
+
     await axios
       .post(
         `http://localhost:5000/user/room/join`,
@@ -44,6 +47,7 @@ const Referral = ({ socket }) => {
 
           console.log(res.data);
 
+          // Emit an event to update the leaderboard
           socket.emit("update-leaderboard", "send me the updated leaderboard");
           navigate(-2);
         }

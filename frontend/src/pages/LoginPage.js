@@ -1,12 +1,14 @@
 import React from "react";
-import Login from "../components/Login";
-import Register from "../components/Register";
-import { useState } from "react";
+import Login from "../components/Login";// Importing Login component
+import Register from "../components/Register";// Importing Register component
+import { useState } from "react";// Importing useState hook
 import loginBg from "../utils/new-login.png";
 import backgroundImage from "../utils/background.avif";
 
 const LoginPage = () => {
-  const [login, setLogin] = useState(true);
+  const [login, setLogin] = useState(true);// State for toggling between login and register forms
+  
+// Function to toggle between login and register forms
   const handleLogin = () => {
     setLogin(!login);
   };

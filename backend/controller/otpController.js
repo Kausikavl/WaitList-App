@@ -1,4 +1,6 @@
+// Import nodemailer for sending emails
 const nodemailer = require("nodemailer");
+// Load environment variables from a .env file into process.env
 require("dotenv").config();
 const { emailConfig } = require("../config/nodemailer");
 
@@ -21,14 +23,14 @@ const createOtp = async (req, res, next) => {
     return res.status(5000).json({ error });
   }
 };
-
+// Function to send an email with the OTP
 const sendEMail = (req, res) => {
   console.log(req.user.email)
   const transporter = nodemailer.createTransport(emailConfig);
   const mailOptions = {
-    from: 'kausikavl25@gmail.com', 
-    to: req.user.email, 
-    subject: "test subject", 
+    from: 'kausikavl25@gmail.com', //Send the address
+    to: req.user.email, //Receivers the email Address
+    subject: "test subject", //Subject of the email
     html: `
         <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
   <div style="margin:50px auto;width:70%;padding:20px 0">
@@ -46,10 +48,13 @@ const sendEMail = (req, res) => {
   </div>
 </div>`,
   };
+  //send the email
   transporter
     .sendMail(mailOptions)
     .then((info) => {
       console.log("email sent");
+
+      // Send success response if email is sent successfully
       return res.status(201).json({
         message: "you should receive an email",
         email: info,
@@ -60,6 +65,8 @@ const sendEMail = (req, res) => {
       return res.status(500).json({ error });
     });
 };
+
+// Function to verify the OTP
 const verifyOtp = async (req, res) => {
   try {
     const { email } = req.user;
@@ -74,6 +81,7 @@ const verifyOtp = async (req, res) => {
           { email: userOTP.email },
           { verified: true }
         );
+         // Fetch the updated user details
         let user = await User.findOne({ email: email });
         return res.status(200).json({ message: "user verified", user });
       }

@@ -6,6 +6,7 @@ const CountDown = ({ resendOTP, setVerifying, verifying }) => {
   const [seconds, setSeconds] = useState(10);
 
   useEffect(() => {
+     // Countdown timer logic
     const interval = setInterval(() => {
       if (seconds > 0) {
         setSeconds(seconds - 1)

@@ -1,3 +1,4 @@
+// Import necessary models and utilities
 const User = require('../model/User')
 const Room = require('../model/Room')
 const admin = require('../model/admin')
@@ -5,6 +6,7 @@ const signJswtToken = require('../config/jwt');
 const { userInfo } = require('./userController');
 const { param } = require('../routes');
 
+// Admin login function
 const adminLogin = async (req, res) => {
     const { email, password } = req.body.user;
     console.log(req.body.user);
@@ -22,7 +24,7 @@ const adminLogin = async (req, res) => {
         if (password != existingAdam.password) {
           return res.status(504).json({ message: "password or email incorrect" });
         }
-        
+              // Convert admin object to JSON and sign JWT token
         let ad = existingAdam.toJSON(); 
         let token = signJswtToken(ad);
         res.send({ message: "Logged in", token: token });
@@ -33,6 +35,8 @@ const adminLogin = async (req, res) => {
     }
 };
 
+
+// Function to get all rooms and users, and combine data
 const getall = async(req, res) => {
   const rooms = await Room.find();
 

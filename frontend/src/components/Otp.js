@@ -15,6 +15,7 @@ const Otp = () => {
   const [checkOTP, setCheckOTP] = useState(false);
 
   useEffect(() => {
+     // Prompt user before leaving the page
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);

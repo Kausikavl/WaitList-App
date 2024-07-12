@@ -10,6 +10,7 @@ const HomePage = () => {
 
   const navigate = useNavigate();
 
+    // Function to fetch user info using the token
   const getInfo = async (token) => {
     let config = {
       headers: {
@@ -22,16 +23,17 @@ const HomePage = () => {
       .get("http://localhost:5000/user/get-info", config)
       .then((response) => {
         const { user } = response.data;
-        setUser(user);
+        setUser(user);// Setting user context with fetched user data
       })
       .catch((err) => {
-        localStorage.removeItem("signedJWT");
+        localStorage.removeItem("signedJWT");// Removing JWT from local storage if error occurs
         console.log("invalid jwt user not authenticated");
-        navigate("/");
+        navigate("/");// Redirecting to homepage on error
       });
   };
 
   useEffect(() => {
+    // Fetching user info on component mount
     const timer = setTimeout(() => {
       getInfo(token);
     }, 100);
@@ -39,6 +41,7 @@ const HomePage = () => {
   }, [token]);
 
   return (
+     // Main container div for the homepage
     <div
       className="flex flex-col justify-center items-center  bg-cover mt-10   bg-center"
     >

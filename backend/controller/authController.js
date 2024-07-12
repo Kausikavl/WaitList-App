@@ -1,5 +1,7 @@
+// Import the User model and JWT token signing function
 const User = require("../model/User");
 const signJswtToken = require("../config/jwt");
+// Register function for new user sign-up
 const register = async (req, res) => {
   const { name, email, password } = req.body.user;
   console.log(req.body.user);
@@ -7,6 +9,7 @@ const register = async (req, res) => {
     return res.status(300).json({ message: "fill all fields" });
   }
   try {
+        // Check if a user with the given email already exists
     const existingUser = await User.findOne({ email: email });
     if (existingUser) {
       return res
@@ -21,6 +24,7 @@ const register = async (req, res) => {
     return res.status(400).json({ message: err });
   }
 };
+// Login function for user authentication
 const login = async (req, res) => {
   const { email, password } = req.body.user;
   console.log(req.body.user);
@@ -39,6 +43,8 @@ const login = async (req, res) => {
         return res.status(504).json({ message: "password or email incorrect" });
       }
       
+
+      // Convert user object to JSON and sign JWT token
       let user = existingUser.toJSON(); 
       let token = signJswtToken(user);
       res.send({ message: "Logged in", token: token });
@@ -49,6 +55,6 @@ const login = async (req, res) => {
   }
 };
 
-
+// Export the login and register functions
 
 module.exports = { login, register };

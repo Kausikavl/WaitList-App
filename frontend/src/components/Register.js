@@ -11,7 +11,7 @@ const Register = ({ handleLogin }) => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-
+  // Handle form submission for registration
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name || !email || !password || !confirmPassword) {
@@ -42,6 +42,8 @@ const Register = ({ handleLogin }) => {
       });
   };
 
+
+  // Handle input changes for form fields
   const handleInput = (e, changeState) => {
     changeState(e.target.value);
   };

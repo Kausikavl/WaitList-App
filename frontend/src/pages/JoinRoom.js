@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserState } from "../context/UserProvider";
-import Otp from "../components/Otp";
-import Referral from "../components/Referral";
+import Otp from "../components/Otp"; // Importing Otp component
+import Referral from "../components/Referral"; // Importing Referral component
 
 
 const JoinRoom = ({socket}) => {
   const { user } = UserState();
 
-  const navigate = useNavigate();
+  const navigate = useNavigate();// Initializing useNavigate hook for navigation
 
   return (
     <div className="flex flex-col items-center justify-gap gap-10  h-[100%] w-[100%]   bg-slate-100">
